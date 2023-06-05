@@ -3,7 +3,7 @@
     <p>{{ title }}</p>
     <ul>
       <li v-for="todo in todos" :key="todo" @click="increment">
-        {{ todo}} - {{ todo}}
+        {{ todo }} - {{ todo }}
       </li>
     </ul>
     <p>Count: {{ todoCount }} / {{ meta }}</p>
@@ -33,5 +33,4 @@ function increment() {
 }
 
 const todoCount = computed(() => props.todos.length);
-
 </script>
