@@ -5,19 +5,37 @@ h1 {
   margin-right: 10%;
 }
 
-@media only screen and (max-width: 1000px) {
-  h1 {
-    font-size: 2.5em;
-    line-height: 1.5em;
-  }
-}
-
 h3 {
   font-size: 3.5em;
   text-align: center;
 }
 
+@media only screen and (max-width: 1000px) {
+  h1 {
+    font-size: 2em;
+    line-height: 1.5em;
+  }
+
+  h3 {
+    font-size: 2em;
+  }
+}
+
 .dark-background {
   color: white;
   background-color: rgb(0, 26, 255);
+}
+
+.context-link {
+  color: yellow;
+  text-align: center;
+  font-size: 2em;
+}
+
+.bibleserver-btn {
+  background-color: brown;
+  position: fixed;
+  z-index: 999;
+  bottom: 20px;
+  right: 20px;
 }
