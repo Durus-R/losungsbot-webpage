@@ -1,5 +1,5 @@
 <template>
-  <div class="q-mx-auto" @click="visibility = !visibility">
+  <div class="q-mx-auto" v-touch-swipe.mouse.up.down="handleSwipe">
     <h4 v-if="is_sunday">{{ props.sunday }}</h4>
     <h3 v-if="visibility">
       {{ props.at_source }}
@@ -14,37 +14,35 @@
       {{ props.nt_text }}
     </h1>
     <p></p>
-    <a :href="hyperlink" v-if="$q.screen.width >= 1000 && is_desktop_device"
-      ><p class="context-link">
-        Hier klicken um den Kontext nachzuschlagen!
-      </p></a
-    >
     <QBtn
       :href="hyperlink"
-      size="xl"
+      :size="btn_size"
       round
       icon="book"
       class="bibleserver-btn"
-
-      v-else
-    ><QTooltip>Hier klicken, um die Bibelstelle nachzuschlagen!</QTooltip>
-  </QBtn>
+      >
+    </QBtn>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { useQuasar } from 'quasar';
-import { computed, ref } from 'vue';
-import { QBtn, QTooltip } from 'quasar';
-const $q = useQuasar();
+import { computed, ref, watch } from 'vue';
+import { QBtn } from 'quasar';
+import { useDateStore } from 'src/stores/today_date';
+const store = useDateStore();
 
 const isIPhone = /iPhone/i.test(navigator.userAgent);
 const isAndroid = /Android/i.test(navigator.userAgent);
 
 const is_mobile_device = isIPhone || isAndroid;
-const is_desktop_device = !is_mobile_device;
+
+const btn_size = is_mobile_device ? 'xl': 'lg'
 
 const visibility = ref(true);
+function handleSwipe () {
+  visibility.value = !visibility.value
+}
+
 const props = defineProps({
   at_text: String,
   at_source: String,
@@ -63,5 +61,10 @@ const hyperlink = computed(() => {
       'https://www.bibleserver.com/LUT/' + props.nt_source?.replaceAll(' ', '')
     );
   }
+});
+watch(hyperlink, () => {
+  store.$patch({
+    url: hyperlink.value,
+  });
 });
 </script>

@@ -26,8 +26,7 @@ export interface entry {
   Lehrtext: string;
 }
 
-export function get_today(data: entry[]) {
-  const date = new Date();
+export function get_today(data: entry[], date: Date) {
   for (const i of data) {
     if (i.Datum == date_string(date)) {
       const result: today_data = {

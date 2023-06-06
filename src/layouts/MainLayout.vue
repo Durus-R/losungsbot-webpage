@@ -1,10 +1,16 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
+  <q-layout view="lHh Lpr lFf" class="dark-background">
+    <q-header elevated class = "header">
       <q-toolbar>
-        <q-toolbar-title> Quasar App </q-toolbar-title>
-
-        <div>Quasar v{{ $q.version }}</div>
+        <q-toolbar-title> Purim Online - Tageslosung </q-toolbar-title>
+        <QBtn
+          round
+          flat
+          icon="code"
+          class="github-icon-button"
+          href="https://github.com/Durus-R"
+        >
+        </QBtn>
       </q-toolbar>
     </q-header>
 
@@ -14,4 +20,7 @@
   </q-layout>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { QBtn } from 'quasar';
+
+</script>
