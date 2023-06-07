@@ -23,7 +23,7 @@ h3 {
 
 .dark-background {
   color: white;
-  background: rgba(0, 0, 0, .65) url('/wallpaper.jpg');
+  background: rgba(0, 0, 0, 0.65) url('/wallpaper.jpg');
   background-size: cover;
   background-clip: content-box;
   background-blend-mode: darken;
@@ -48,6 +48,10 @@ h3 {
   right: 20px;
 }
 
-.github-icon {
-  vertical-align: auto;
+.calendar-btn {
+  background-color: $orange;
+  position: fixed;
+  z-index: 999;
+  bottom: 100px;
+  right: 20px;
 }

@@ -1,10 +1,10 @@
 import { defineStore } from 'pinia';
-import { ref } from 'vue';
 
 export const useDateStore = defineStore('date', {
   state: () => ({
-    date: ref(new Date()),
-    url: ref(''),
+    date: new Date(),
+    url: '',
+    at: true,
   }),
 
   actions: {
@@ -13,6 +13,15 @@ export const useDateStore = defineStore('date', {
     },
     decrement() {
       this.date.setDate(this.date.getDay() - 1);
+    },
+    setAT(val: boolean) {
+      this.at = val;
+    },
+    switchAT() {
+      this.at = !this.at;
+    },
+    setDate(date: Date) {
+      this.date = date;
     },
   },
 });
