@@ -1,10 +1,9 @@
 <template>
   <div class="q-mx-auto" @click="handleClick">
-    <transition name="fly-out"><div v-if="store.at">
     <h3 >
       {{ props.at_source }}
     </h3>
-    <h1 v-html="props.at_text"></h1></div></transition>
+    <h1 v-html="props.at_text"></h1>
     <h3 v-if="!store.at">
       {{ props.nt_source }}
     </h3>
