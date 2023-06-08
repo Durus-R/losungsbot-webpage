@@ -28,12 +28,33 @@
           </div> </q-date></QPopupProxy
     ></QBtn>
     <QBtn :href="hyperlink" size="lg" round icon="book" class="bibleserver-btn">
-
-    </QBtn><QIcon name="expand_more" size="lg" class="icon-down" v-if="is_mobile_device && store.at"></QIcon>
-    <QIcon name="expand_more" size="lg" class="icon-down animated-icon-down" color="grey" v-if="is_mobile_device && store.at"></QIcon>
-    <QIcon name="expand_less" size="lg" class="icon-up" v-if="is_mobile_device && !store.at"></QIcon>
-    <QIcon name="expand_less" size="lg" class="icon-up animated-icon-up" color="grey" v-if="is_mobile_device && !store.at"></QIcon>
-
+    </QBtn
+    ><QIcon
+      name="expand_less"
+      size="lg"
+      class="icon-up"
+      v-if="is_mobile_device && store.at"
+    ></QIcon>
+    <QIcon
+      name="expand_less"
+      size="lg"
+      class="icon-up animated-icon-up"
+      color="grey"
+      v-if="is_mobile_device && store.at"
+    ></QIcon>
+    <QIcon
+      name="expand_more"
+      size="lg"
+      class="icon-down"
+      v-if="is_mobile_device && !store.at"
+    ></QIcon>
+    <QIcon
+      name="expand_more"
+      size="lg"
+      class="icon-down animated-icon-down"
+      color="grey"
+      v-if="is_mobile_device && !store.at"
+    ></QIcon>
   </div>
 </template>
 
@@ -44,7 +65,8 @@ import { QBtn, QPopupProxy, QIcon } from 'quasar';
 
 const store = useDateStore();
 
-const isIPhone = /iPhone/i.test(navigator.userAgent);
+const isIPhone =
+  /iPhone/i.test(navigator.userAgent) || /iPad/i.test(navigator.userAgent);
 const isAndroid = /Android/i.test(navigator.userAgent);
 
 const is_mobile_device = isIPhone || isAndroid;
@@ -80,13 +102,18 @@ watch(hyperlink, () => {
 });
 
 const ger_Locale = {
-        /* starting with Sunday */
-        days: 'Sonntag_Montag_Dienstag_Mittwoch_Donnerstag_Freitag_Samstag'.split('_'),
-        daysShort: 'So_Mo_Di_Mi_Do_Fr_Sa'.split('_'),
-        months: 'Januar_Februar_März_April_Mai_Juni_Juli_August_September_Oktober_Dezember'.split('_'),
-        monthsShort: 'Jan_Feb_Mär_Apr_Mai_Jun_Jul_Aug_Sep_Okt_Dez'.split('_'),
-        firstDayOfWeek: 1, // 0-6, 0 - Sunday, 1 Monday, ...
-        format24h: true,
-        pluralDay: 'Tage'
-      }
+  /* starting with Sunday */
+  days: 'Sonntag_Montag_Dienstag_Mittwoch_Donnerstag_Freitag_Samstag'.split(
+    '_'
+  ),
+  daysShort: 'So_Mo_Di_Mi_Do_Fr_Sa'.split('_'),
+  months:
+    'Januar_Februar_März_April_Mai_Juni_Juli_August_September_Oktober_Dezember'.split(
+      '_'
+    ),
+  monthsShort: 'Jan_Feb_Mär_Apr_Mai_Jun_Jul_Aug_Sep_Okt_Dez'.split('_'),
+  firstDayOfWeek: 1, // 0-6, 0 - Sunday, 1 Monday, ...
+  format24h: true,
+  pluralDay: 'Tage',
+};
 </script>

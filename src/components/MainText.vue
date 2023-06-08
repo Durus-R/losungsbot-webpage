@@ -1,9 +1,10 @@
 <template>
   <div class="q-mx-auto" @click="handleClick">
-    <h3 v-if="store.at">
+    <transition name="fly-out"><div v-if="store.at">
+    <h3 >
       {{ props.at_source }}
     </h3>
-    <h1 v-if="store.at" v-html="props.at_text"></h1>
+    <h1 v-html="props.at_text"></h1></div></transition>
     <h3 v-if="!store.at">
       {{ props.nt_source }}
     </h3>
@@ -15,7 +16,8 @@
 import { useDateStore } from 'src/stores/today_date';
 const store = useDateStore();
 
-const isIPhone = /iPhone/i.test(navigator.userAgent);
+const isIPhone =
+  /iPhone/i.test(navigator.userAgent) || /iPad/i.test(navigator.userAgent);
 const isAndroid = /Android/i.test(navigator.userAgent);
 
 const is_mobile_device = isIPhone || isAndroid;
