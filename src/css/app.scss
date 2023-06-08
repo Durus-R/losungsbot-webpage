@@ -59,3 +59,56 @@ h3 {
   bottom: 100px;
   right: 20px;
 }
+
+.icon-down {
+  position: fixed;
+  z-index: 999;
+  bottom: 10px;
+  left: calc(50vw - 19px);
+}
+
+@keyframes hop {
+  0% {
+    transform: translateY(0%);
+  }
+
+  50% {
+    transform: translateY(-50%);
+  }
+
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+.animated-icon-down {
+  z-index: 500;
+  animation: hop 1s ease-in-out infinite alternate;
+}
+
+.icon-up {
+  position: fixed;
+  z-index: 999;
+  top: 65px;
+  left: calc(50vw - 19px);
+}
+
+@keyframes hop_negative {
+  0% {
+    transform: translateY(0%);
+  }
+
+  50% {
+    transform: translateY(50%);
+  }
+
+  100% {
+    transform: translateY(50%);
+  }
+}
+
+.animated-icon-up {
+  z-index: 500;
+  animation: hop_negative 1s ease-in-out infinite alternate;
+}
+

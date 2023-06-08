@@ -1,8 +1,8 @@
 <template>
   <q-page
     class="row items-center justify-center"
-    v-touch-swipe.mouse.up="switchAT"
-    v-touch-swipe.mouse.down="switchNT"
+    v-touch-swipe.mouse.up="switchNT"
+    v-touch-swipe.mouse.down="switchAT"
   >
     <MainText
       :at_text="at_text"
