@@ -2,8 +2,11 @@
   <q-layout view="lHh Lpr lFf" class="dark-background">
     <q-header elevated class="header">
       <q-toolbar>
-        <q-toolbar-title>
+        <q-toolbar-title v-if="$q.platform.is.desktop">
           Purim Web - Losung für den {{ today }}
+        </q-toolbar-title>
+        <q-toolbar-title v-else class="text-center">
+          {{ today }}
         </q-toolbar-title>
         <QBtn
           round
@@ -24,7 +27,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { QBtn, useQuasar } from 'quasar';
+import { QBtn, useQuasar, QIcon } from 'quasar';
 import { useDateStore } from 'src/stores/today_date';
 import { formatDate } from 'src/lib/data';
 
