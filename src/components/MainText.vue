@@ -1,5 +1,5 @@
 <template>
-  <div class="q-mx-auto" @click="handleClick">
+  <div @click="handleClick">
     <div v-if="store.at" class="center-screen">
       <h3>
         {{ props.at_source }}
