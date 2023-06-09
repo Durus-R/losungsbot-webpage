@@ -13,7 +13,7 @@
           flat
           v-if="!$q.platform.is.mobile"
           icon="code"
-          href="https://github.com/Durus-R"
+          href="https://github.com/Durus-R/losungsbot-webpage"
         >
         </QBtn>
       </q-toolbar>
@@ -27,7 +27,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { QBtn, useQuasar, QIcon } from 'quasar';
+import { QBtn, useQuasar } from 'quasar';
 import { useDateStore } from 'src/stores/today_date';
 import { formatDate } from 'src/lib/data';
 
