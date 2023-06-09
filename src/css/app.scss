@@ -1,18 +1,28 @@
 // app global css in SCSS form
+.center-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+
 h1 {
   font-size: 5em;
   margin-left: 10%;
   margin-right: 10%;
-  text-align: center;
 }
 
 h3 {
   font-size: 3.5em;
-  text-align: center;
-  vertical-align: middle;
 }
 
 @media only screen and (max-width: 1000px) {
+  .center-screen {
+    min-height: 70vh;
+  }
   h1 {
     font-size: 2em;
     line-height: 1.5em;
@@ -98,6 +108,3 @@ h3 {
   z-index: 500;
   animation: hop 1s ease-in-out infinite alternate;
 }
-
-
-

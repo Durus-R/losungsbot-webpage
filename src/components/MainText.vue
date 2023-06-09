@@ -1,13 +1,17 @@
 <template>
   <div class="q-mx-auto" @click="handleClick">
-    <h3 v-if="store.at">
-      {{ props.at_source }}
-    </h3>
-    <h1 v-if="store.at" v-html="props.at_text"></h1>
-    <h3 v-if="!store.at">
-      {{ props.nt_source }}
-    </h3>
-    <h1 v-if="!store.at" v-html="props.nt_text"></h1>
+    <div v-if="store.at" class="center-screen">
+      <h3>
+        {{ props.at_source }}
+      </h3>
+      <h1 v-html="props.at_text"></h1>
+    </div>
+    <div v-if="!store.at" class="center-screen">
+      <h3>
+        {{ props.nt_source }}
+      </h3>
+      <h1 v-html="props.nt_text"></h1>
+    </div>
   </div>
 </template>
 
