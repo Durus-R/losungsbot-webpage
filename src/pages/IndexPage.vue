@@ -1,6 +1,6 @@
 <template>
   <q-page
-    class="row items-center justify-center"
+    class="row items-start justify-center"
     v-touch-swipe.mouse.up="switchNT"
     v-touch-swipe.mouse.down="switchAT"
   >
@@ -10,11 +10,8 @@
       :nt_text="nt_text"
       :nt_source="nt_source"
     ></MainText>
-    <ContextButton
-      :at_source="at_source"
-      :nt_source="nt_source"
-    ></ContextButton>
   </q-page>
+  <ContextButton :at_source="at_source" :nt_source="nt_source"></ContextButton>
 </template>
 
 <script setup lang="ts">

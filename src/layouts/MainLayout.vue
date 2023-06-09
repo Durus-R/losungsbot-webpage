@@ -8,7 +8,7 @@
         <QBtn
           round
           flat
-          v-if="!is_mobile_device"
+          v-if="!$q.platform.is.mobile"
           icon="code"
           href="https://github.com/Durus-R"
         >
@@ -24,19 +24,14 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { QBtn } from 'quasar';
+import { QBtn, useQuasar } from 'quasar';
 import { useDateStore } from 'src/stores/today_date';
 import { formatDate } from 'src/lib/data';
 
 const store = useDateStore();
-
-const isIPhone =
-  /iPhone/i.test(navigator.userAgent) || /iPad/i.test(navigator.userAgent);
-const isAndroid = /Android/i.test(navigator.userAgent);
+const $q = useQuasar();
 
 const today = computed(() => {
   return formatDate(store.date);
 });
-
-const is_mobile_device = isIPhone || isAndroid;
 </script>

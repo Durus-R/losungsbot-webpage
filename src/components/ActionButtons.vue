@@ -33,27 +33,27 @@
       name="expand_less"
       size="lg"
       class="icon-up"
-      v-if="is_mobile_device && store.at"
+      v-if="$q.platform.is.mobile && store.at"
     ></QIcon>
     <QIcon
       name="expand_less"
       size="lg"
       class="icon-up animated-icon-up"
       color="grey"
-      v-if="is_mobile_device && store.at"
+      v-if="$q.platform.is.mobile && store.at"
     ></QIcon>
     <QIcon
       name="expand_more"
       size="lg"
       class="icon-down"
-      v-if="is_mobile_device && !store.at"
+      v-if="$q.platform.is.mobile && !store.at"
     ></QIcon>
     <QIcon
       name="expand_more"
       size="lg"
       class="icon-down animated-icon-down"
       color="grey"
-      v-if="is_mobile_device && !store.at"
+      v-if="$q.platform.is.mobile && !store.at"
     ></QIcon>
   </div>
 </template>
@@ -61,15 +61,10 @@
 <script lang="ts" setup>
 import { useDateStore } from 'src/stores/today_date';
 import { computed, watch, ref } from 'vue';
-import { QBtn, QPopupProxy, QIcon } from 'quasar';
+import { QBtn, QPopupProxy, QIcon, useQuasar } from 'quasar';
 
 const store = useDateStore();
-
-const isIPhone =
-  /iPhone/i.test(navigator.userAgent) || /iPad/i.test(navigator.userAgent);
-const isAndroid = /Android/i.test(navigator.userAgent);
-
-const is_mobile_device = isIPhone || isAndroid;
+const $q = useQuasar();
 
 const props = defineProps({
   at_source: String,

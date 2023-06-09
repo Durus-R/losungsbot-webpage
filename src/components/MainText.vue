@@ -16,17 +16,14 @@
 </template>
 
 <script lang="ts" setup>
+import { useQuasar } from 'quasar';
 import { useDateStore } from 'src/stores/today_date';
 const store = useDateStore();
 
-const isIPhone =
-  /iPhone/i.test(navigator.userAgent) || /iPad/i.test(navigator.userAgent);
-const isAndroid = /Android/i.test(navigator.userAgent);
-
-const is_mobile_device = isIPhone || isAndroid;
+const $q = useQuasar();
 
 function handleClick() {
-  if (!is_mobile_device) {
+  if (!$q.platform.is.mobile) {
     store.switchAT();
   }
 }
