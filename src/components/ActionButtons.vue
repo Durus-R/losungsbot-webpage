@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div v-if="!($q.platform.is.mobile && $q.fullscreen.isActive)">
+    <QBtn round size="lg" v-if="$q.platform.is.mobile" icon="fullscreen" class="fullscreen-btn" @click="$q.fullscreen.request()"></QBtn>
     <QBtn
       @click="handleCalendarclick"
       size="lg"

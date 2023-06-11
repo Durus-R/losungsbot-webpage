@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lFf" class="dark-background">
-    <q-header elevated class="header">
+    <q-header elevated class="header" v-if="!($q.platform.is.mobile && $q.fullscreen.isActive)">
       <q-toolbar>
         <q-toolbar-title v-if="$q.platform.is.desktop">
           Purim Web - Losung für den {{ today }}

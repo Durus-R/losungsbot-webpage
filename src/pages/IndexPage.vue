@@ -3,6 +3,7 @@
     class="row items-start justify-center"
     v-touch-swipe.mouse.up="switchNT"
     v-touch-swipe.mouse.down="switchAT"
+    @click="handleClick"
   >
     <MainText
       :at_text="at_text"
@@ -22,11 +23,19 @@ import { get_today, entry } from 'src/lib/data';
 import { useDateStore } from 'src/stores/today_date';
 import Papa from 'papaparse';
 import { watch } from 'vue';
+import { useQuasar } from 'quasar';
 
 const at_text = ref('');
 const at_source = ref('');
 const nt_text = ref('');
 const nt_source = ref('');
+const $q = useQuasar()
+
+function handleClick() {
+  if ($q.platform.is.mobile && $q.fullscreen.isActive) {
+    $q.fullscreen.exit()
+  }
+}
 
 const store = useDateStore();
 
