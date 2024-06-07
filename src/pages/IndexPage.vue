@@ -12,7 +12,7 @@
       :nt_text="nt_text"
       :nt_source="nt_source"
     ></MainText>
-      <p v-if="/*(secondsSinceMove < 5) &&*/ !($q.platform.is.mobile)">(Klicken, um zwischem Losungsvers und Lehrvers zu wechseln)</p>
+      <p v-if="(secondsSinceMove < 2.5) && !($q.platform.is.mobile)">(Klicken, um zwischem Losungsvers und Lehrvers zu wechseln)</p>
   </div>
   </q-page>
   <ContextButton :toggleButtons="toggleMobileButtons" :at_source="at_source" :nt_source="nt_source"></ContextButton>
