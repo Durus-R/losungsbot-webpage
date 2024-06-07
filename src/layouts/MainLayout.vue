@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="lHh Lpr lFf" class="dark-background">
+  <q-layout view="lHh Lpr lFf" class="background">
     <q-header elevated class="header" v-if="!($q.platform.is.mobile && $q.fullscreen.isActive)">
       <q-toolbar>
         <q-toolbar-title v-if="$q.platform.is.desktop">

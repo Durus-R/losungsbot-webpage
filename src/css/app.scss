@@ -14,39 +14,44 @@
   align-items: start;
 }
 
-h1 {
-  font-size: 5em;
-  margin-left: 10%;
-  margin-right: 10%;
+h3 {
+  font-size: 2em;
+  margin-left: 10vw;
+  margin-right: 10vw;
+  line-height: 2em;
   grid-area: Text;
 }
 
-h3 {
+h1 {
   font-size: 3.5em;
   grid-area: Source;
 }
 
-@media only screen and (max-width: 1150px) {
+@media only screen and (max-width: 1000px) {
   .center-screen {
-    margin-top: 20vh;
+    margin-top: 0;
   }
-  h1 {
-    font-size: 2em;
+  h3 {
+    font-size: 1.5em;
     line-height: 1.5em;
   }
 
-  h3 {
+  h1 {
     font-size: 2em;
   }
 }
 
-.dark-background {
+.background {
   color: white;
-  background: rgba(0, 0, 0, 0.65) url('/wallpaper.jpg');
   background-size: cover;
+  background-color: rgba(0, 0, 0, 0.65);
+  background-image: url('/wallpaper.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   background-clip: content-box;
   background-blend-mode: darken;
 }
+
 
 .header {
   background: rgba(0, 0, 0, 0.2);
@@ -60,14 +65,6 @@ h3 {
   text-align: center;
   font-size: 2em;
   text-decoration: none;
-}
-
-.fullscreen-btn {
-  background-color: blueviolet;
-  position: fixed;
-  z-index: 999;
-  bottom: 180px;
-  right: 20px;
 }
 
 .bibleserver-btn {

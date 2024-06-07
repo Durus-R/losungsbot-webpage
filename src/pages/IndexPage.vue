@@ -1,25 +1,25 @@
 <template>
   <q-page
-    class="row items-start justify-center"
     v-touch-swipe.mouse.up="switchNT"
     v-touch-swipe.mouse.down="switchAT"
     @click="handleClick"
     @mousemove="handleMousemove"
-  >
+  ><div class="column items-center justify-center">
     <MainText
+      ref="centralElement"
       :at_text="at_text"
       :at_source="at_source"
       :nt_text="nt_text"
       :nt_source="nt_source"
     ></MainText>
-    <div class="flex flex-grow flex-column justify-end items-end">
-      <p v-if="(secondsSinceMove < 5) && !($q.platform.is.mobile)">(Klicken, um zwischem Losungsvers und Lehrvers zu wechseln)</p></div>
+      <p v-if="/*(secondsSinceMove < 5) &&*/ !($q.platform.is.mobile)">(Klicken, um zwischem Losungsvers und Lehrvers zu wechseln)</p>
+  </div>
   </q-page>
   <ContextButton :toggleButtons="toggleMobileButtons" :at_source="at_source" :nt_source="nt_source"></ContextButton>
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { nextTick, onMounted, Ref, ref } from 'vue';
 import MainText from '../components/MainText.vue';
 import ContextButton from '../components/ActionButtons.vue';
 import { get_today, entry } from 'src/lib/data';
@@ -29,13 +29,20 @@ import { watch } from 'vue';
 import { useQuasar } from 'quasar';
 import { inject } from '@vercel/analytics'
 
+const centralElement = ref(null) as Ref<HTMLElement | null>
+
+onMounted(() => {
+  inject();
+});
+
+
 const at_text = ref('');
 const at_source = ref('');
 const nt_text = ref('');
 const nt_source = ref('');
 const $q = useQuasar()
 
-onMounted(()=> inject())
+
 
 const toggleMobileButtons = ref(true)
 
@@ -65,6 +72,11 @@ function switchAT() {
 function switchNT() {
   store.setAT(false);
 }
+
+
+watch(() => store.at, () => {
+  console.log('AT changed')
+})
 
 const strong_regex = /\/(.*?)\//g;
 
