@@ -19,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import MainText from '../components/MainText.vue';
 import ContextButton from '../components/ActionButtons.vue';
 import { get_today, entry } from 'src/lib/data';
@@ -27,12 +27,15 @@ import { useDateStore } from 'src/stores/today_date';
 import Papa from 'papaparse';
 import { watch } from 'vue';
 import { useQuasar } from 'quasar';
+import { inject } from '@vercel/analytics'
 
 const at_text = ref('');
 const at_source = ref('');
 const nt_text = ref('');
 const nt_source = ref('');
 const $q = useQuasar()
+
+onMounted(()=> inject())
 
 const toggleMobileButtons = ref(true)
 
