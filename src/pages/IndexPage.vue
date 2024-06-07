@@ -66,8 +66,8 @@ function switchNT() {
 const strong_regex = /\/(.*?)\//g;
 
 function parse() {
-  Papa.parse('/Losungen.csv', {
-    encoding: 'CP1252',
+  Papa.parse(`/Losungen_${(new Date()).getFullYear()}.csv`, {
+    encoding: 'utf-8',
     download: true,
     complete: (result) => {
       const jsonData = result.data as entry[];
