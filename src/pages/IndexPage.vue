@@ -19,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import { nextTick, onMounted, Ref, ref } from 'vue';
+import { onMounted, Ref, ref } from 'vue';
 import MainText from '../components/MainText.vue';
 import ContextButton from '../components/ActionButtons.vue';
 import { get_today, entry } from 'src/lib/data';
@@ -74,9 +74,6 @@ function switchNT() {
 }
 
 
-watch(() => store.at, () => {
-  console.log('AT changed')
-})
 
 const strong_regex = /\/(.*?)\//g;
 
