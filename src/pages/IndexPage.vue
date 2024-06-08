@@ -19,9 +19,9 @@
     ></MainText>
     <transition
       appear
-      appear-active-class="animated pulse"
+      appear-active-class="animated slow pulse"
       enter-active-class="animated slow fadeIn"
-      :leave-active-class="text_animation_fadeout"
+      leave-active-class="animated {{text_animation_fadeout_speed}} fadeOut"
     >
       <p v-if="!force_no_click_hint && (secondsSinceMove < 5) && !($q.platform.is.mobile)">(Klicken, um zwischem Losungsvers und Lehrvers zu wechseln)</p>
     </transition>
@@ -49,7 +49,7 @@ onMounted(inject)
 
 const force_no_click_hint = ref(false)
 
-const text_animation_fadeout = ref('animated slow fadeOut')
+const text_animation_fadeout_speed = ref('slow')
 
 const at_text = ref('');
 const at_source = ref('');
@@ -59,18 +59,25 @@ const $q = useQuasar()
 
 const toggleMobileButtons = ref(true)
 
+const click_lock = ref(false)
+
 async function handleClick() {
   if ($q.platform.is.mobile) {
     toggleMobileButtons.value = !toggleMobileButtons.value
   } else {
+    if (click_lock.value) {
+      return
+    }
+    click_lock.value = true
     force_no_click_hint.value = true
-    text_animation_fadeout.value = 'animated fast fadeOut'
+    text_animation_fadeout_speed.value = 'fast'
     setTimeout(()=> {
       force_no_click_hint.value = false
     }, 800)
     await sleep(200)
     store.switchAT()
-    text_animation_fadeout.value = 'animated slow fadeOut'
+    setTimeout(()=>{click_lock.value = false}, 200)
+    text_animation_fadeout_speed.value = 'slow'
   }
 }
 
