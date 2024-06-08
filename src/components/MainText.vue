@@ -1,5 +1,5 @@
 <template>
-  <div @click="handleClick">
+  <div>
     <transition-group
       enter-active-class="animated delay-1s fadeIn"
       leave-active-class="animated fast fadeOut"
@@ -21,18 +21,9 @@
 </template>
 
 <script lang="ts" setup>
-import { useQuasar } from 'quasar';
 import { useDateStore } from 'src/stores/today_date';
 const store = useDateStore();
 
-
-const $q = useQuasar();
-
-function handleClick() {
-  if (!$q.platform.is.mobile) {
-    store.switchAT();
-  }
-}
 
 const props = defineProps({
   at_text: String,

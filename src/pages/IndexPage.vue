@@ -12,7 +12,14 @@
       :nt_text="nt_text"
       :nt_source="nt_source"
     ></MainText>
-      <p v-if="(secondsSinceMove < 2.5) && !($q.platform.is.mobile)">(Klicken, um zwischem Losungsvers und Lehrvers zu wechseln)</p>
+    <transition
+      appear
+      appear-active-class="animated pulse"
+      enter-active-class="animated fadeIn"
+      leave-active-class="animated slow fadeOut"
+    >
+      <p v-if="(secondsSinceMove < 5) && !($q.platform.is.mobile)">(Klicken, um zwischem Losungsvers und Lehrvers zu wechseln)</p>
+    </transition>
   </div>
   </q-page>
   <ContextButton :toggleButtons="toggleMobileButtons" :at_source="at_source" :nt_source="nt_source"></ContextButton>
@@ -42,14 +49,13 @@ const nt_text = ref('');
 const nt_source = ref('');
 const $q = useQuasar()
 
-
-
 const toggleMobileButtons = ref(true)
 
 function handleClick() {
   if ($q.platform.is.mobile) {
     toggleMobileButtons.value = !toggleMobileButtons.value
-    $q.fullscreen.isActive && $q.fullscreen.exit()
+  } else {
+    store.switchAT()
   }
 }
 
