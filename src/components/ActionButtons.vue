@@ -6,13 +6,14 @@
       leave-active-class="animated slower backOutDown"
     >
       <QBtn v-if="props.toggleButtons"
-        key="calendar-btn"
-        @click="handleCalendarclick"
-        size="lg"
-        round
-        icon="event"
-        class="calendar-btn"
+            key="calendar-btn"
+            @click="handleCalendarclick"
+            size="lg"
+            round
+            icon="event"
+            class="calendar-btn"
       >
+        <q-tooltip>Datum wählen</q-tooltip>
         <QPopupProxy cover transition-show="scale" transition-hide="scale"
         >
           <q-date
@@ -38,7 +39,9 @@
         </QPopupProxy
         >
       </QBtn>
-      <QBtn v-if="props.toggleButtons" key="bibleserver-btn" :href="hyperlink" size="lg" round icon="book" class="bibleserver-btn">
+      <QBtn v-if="props.toggleButtons" key="bibleserver-btn" :href="hyperlink" size="lg" round icon="book"
+            class="bibleserver-btn">
+        <q-tooltip>In der Bibel nachschlagen</q-tooltip>
       </QBtn
       >
     </transition-group

@@ -14,7 +14,7 @@
           v-if="!$q.platform.is.mobile"
           icon="code"
           href="https://github.com/Durus-R/losungsbot-webpage"
-        >
+        ><q-tooltip>Quellcode</q-tooltip>
         </QBtn>
       </q-toolbar>
     </q-header>
