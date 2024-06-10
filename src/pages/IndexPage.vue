@@ -1,7 +1,7 @@
 <template>
   <q-page
-    v-touch-swipe.mouse.up="()=>store.setAT(true)"
-    v-touch-swipe.mouse.down="()=>store.setAT(false)"
+    v-touch-swipe.mouse.down="()=>store.setAT(true)"
+    v-touch-swipe.mouse.up="()=>store.setAT(false)"
     @click="handleClick"
     @mousemove="handleMousemove"
   >
