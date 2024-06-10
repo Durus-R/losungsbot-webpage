@@ -2,7 +2,7 @@
   "name": "purim-web",
   "version": "0.0.1",
   "description": "Purim Web Frontend",
-  "productName": "Purim Online",
+  "productName": "Purim Web",
   "author": "Rene Regensbogen <rene.regensbogen@mainquest.org>",
   "private": true,
   "scripts": {
