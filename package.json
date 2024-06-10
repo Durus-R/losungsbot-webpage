@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Purim Web Frontend",
   "productName": "Purim Online",
-  "author": "Rene Regensbogen <68396806+Durus-R@users.noreply.github.com>",
+  "author": "Rene Regensbogen <rene.regensbogen@mainquest.org>",
   "private": true,
   "scripts": {
     "lint": "eslint --ext .js,.ts,.vue ./",
@@ -11,8 +11,11 @@
     "test": "echo \"No test specified\" && exit 0",
     "dev": "quasar dev",
     "build": "quasar build",
+    "build:pwa": "quasar build -m pwa",
     "deploy": "vercel",
-    "deploy:prod": "vercel --prod"
+    "deploy:prod": "vercel --prod",
+    "dev:pwa": "quasar dev -m pwa",
+    "icons": "node scripts/icongen.js && icongenie generate -m pwa -i dist/icongen/icon.png -b dist/icongen/wallpaper.png"
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
@@ -28,6 +31,7 @@
   },
   "devDependencies": {
     "@quasar/app-vite": "^1.0.0",
+    "@quasar/icongenie": "^4.0.0",
     "@types/node": "^12.20.21",
     "@types/papaparse": "^5.3.7",
     "@types/sanitize-html": "^2.11.0",
@@ -38,8 +42,17 @@
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-vue": "^9.0.0",
     "prettier": "^2.5.1",
+    "sharp": "^0.33.4",
+    "svg2img": "^1.0.0-beta.2",
     "typescript": "^4.5.4",
-    "vercel": "^30.2.1"
+    "vercel": "^30.2.1",
+    "workbox-build": "^7.0.0",
+    "workbox-cacheable-response": "^7.0.0",
+    "workbox-core": "^7.0.0",
+    "workbox-expiration": "^7.0.0",
+    "workbox-precaching": "^7.0.0",
+    "workbox-routing": "^7.0.0",
+    "workbox-strategies": "^7.0.0"
   },
   "engines": {
     "node": "^20 || ^18 || ^16 || ^14.19",
