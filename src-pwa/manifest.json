@@ -1,5 +1,6 @@
 {
   "orientation": "portrait",
+  "short_name": "Purim Web",
   "background_color": "#000000",
   "theme_color": "#3f3429",
   "icons": [
