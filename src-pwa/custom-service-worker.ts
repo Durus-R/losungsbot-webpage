@@ -21,7 +21,7 @@ clientsClaim();
 // Use with precache injection
 precacheAndRoute([
   ...self.__WB_MANIFEST,
-  { url: '/wallpaper.jpg', revision: '1' },
+  { url: '/wallpaper.jpg', revision: '1' }
 ]);
 
 cleanupOutdatedCaches();
