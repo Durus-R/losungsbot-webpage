@@ -18,10 +18,12 @@ import { registerRoute, NavigationRoute } from 'workbox-routing';
 self.skipWaiting();
 clientsClaim();
 
+
+
 // Use with precache injection
 precacheAndRoute([
-  ...self.__WB_MANIFEST,
-  { url: '/wallpaper.jpg', revision: '1' }
+  { url: '/wallpaper.jpg', revision: '1' },
+  ...self.__WB_MANIFEST
 ]);
 
 cleanupOutdatedCaches();
