@@ -5,6 +5,12 @@
   "theme_color": "#3f3429",
   "icons": [
     {
+      "src": "icons/maskable-icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
       "src": "icons/icon-128x128.png",
       "sizes": "128x128",
       "type": "image/png"
@@ -28,12 +34,6 @@
       "src": "icons/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
-    },
-    {
-      "src": "icons/maskable-icon-128x128.png",
-      "sizes": "128x128",
-      "type": "image/png",
-      "purpose": "maskable"
     },
     {
       "src": "icons/maskable-icon-512x512.png",
