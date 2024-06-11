@@ -42,10 +42,14 @@ import { useQuasar } from 'quasar';
 import { inject } from '@vercel/analytics'
 import sanitizeHtml from 'sanitize-html'
 import { sleep } from 'src/lib/sleeping';
+import { injectSpeedInsights } from '@vercel/speed-insights';
 
 const centralElement = ref(null) as Ref<HTMLElement | null>
 
-onMounted(inject)
+onMounted(()=> {
+  inject()
+  injectSpeedInsights();
+})
 
 const force_no_click_hint = ref(false)
 
