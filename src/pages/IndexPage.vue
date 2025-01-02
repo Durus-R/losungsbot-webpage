@@ -105,6 +105,7 @@ function parse() {
     download: true,
     complete: (result) => {
       const jsonData = result.data as entry[];
+      console.log(jsonData)
       const now = store.date;
       at_text.value =
         sanitizeHtml(get_today(jsonData, now)?.at_text.replaceAll(
@@ -120,7 +121,7 @@ function parse() {
       nt_source.value = get_today(jsonData, now)?.nt_source ?? '';
     },
     header: true,
-    delimiter: '\t',
+    delimiter: ';',
   });
 }
 
