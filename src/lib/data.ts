@@ -36,9 +36,11 @@ export function get_today(data: entry[], date: Date) {
         nt_text: i.Lehrtext,
         sunday: i.Sonntag,
       };
+
       return result;
     }
   }
+
 }
 
 export function formatDate(date: Date) {

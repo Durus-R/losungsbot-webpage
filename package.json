@@ -23,6 +23,7 @@
     "@vercel/speed-insights": "^1.0.11",
     "axios": "^1.2.1",
     "csv-parser": "^3.0.0",
+    "firebase": "^10.13.1",
     "papaparse": "^5.4.1",
     "pinia": "^2.0.11",
     "quasar": "^2.6.0",
@@ -56,9 +57,10 @@
     "workbox-strategies": "^7.0.0"
   },
   "engines": {
-    "node": "^20 || ^18 || ^16 || ^14.19",
+    "node": "^22 || ^20 || ^18 || ^16 || ^14.19",
     "npm": ">= 6.13.4",
     "yarn": ">= 1.21.1"
   },
+  "license": "THE UNLICENSE",
   "packageManager": "yarn@1.22.21+sha1.1959a18351b811cdeedbd484a8f86c3cc3bbaf72"
 }

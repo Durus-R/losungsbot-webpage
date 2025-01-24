@@ -6,26 +6,31 @@
     @mousemove="handleMousemove"
   >
     <div class="sr-only">
-    BARRIEREFREIER TEXT | ACCESSIBLE TEXT:
-      Losungsvers: <div v-html="at_text" /> ({{at_source}}). Lehrvers: <div v-html="nt_text" /> ({{nt_source}}).
+      BARRIEREFREIER TEXT | ACCESSIBLE TEXT:
+      Losungsvers:
+      <div v-html="at_text" />
+      ({{ at_source }}). Lehrvers:
+      <div v-html="nt_text" />
+      ({{ nt_source }}).
     </div>
     <div class="column items-center justify-center">
-    <MainText
-      ref="centralElement"
-      :at_text="at_text"
-      :at_source="at_source"
-      :nt_text="nt_text"
-      :nt_source="nt_source"
-    ></MainText>
-    <transition
-      appear
-      appear-active-class="animated slow pulse"
-      enter-active-class="animated slow fadeIn"
-      leave-active-class="animated {{text_animation_fadeout_speed}} fadeOut"
-    >
-      <p v-if="!force_no_click_hint && (secondsSinceMove < 5) && !($q.platform.is.mobile)">(Klicken, um zwischem Losungsvers und Lehrvers zu wechseln)</p>
-    </transition>
-  </div>
+      <MainText
+        ref="centralElement"
+        :at_text="at_text"
+        :at_source="at_source"
+        :nt_text="nt_text"
+        :nt_source="nt_source"
+      ></MainText>
+      <transition
+        appear
+        appear-active-class="animated slow pulse"
+        enter-active-class="animated slow fadeIn"
+        leave-active-class="animated {{text_animation_fadeout_speed}} fadeOut"
+      >
+        <p v-if="!force_no_click_hint && (secondsSinceMove < 5) && !($q.platform.is.mobile)">(Klicken, um zwischem
+          Losungsvers und Lehrvers zu wechseln)</p>
+      </transition>
+    </div>
   </q-page>
   <ContextButton :toggleButtons="toggleMobileButtons" :at_source="at_source" :nt_source="nt_source"></ContextButton>
 </template>
@@ -39,61 +44,63 @@ import { useDateStore } from 'src/stores/today_date';
 import Papa from 'papaparse';
 import { watch } from 'vue';
 import { useQuasar } from 'quasar';
-import { inject } from '@vercel/analytics'
-import sanitizeHtml from 'sanitize-html'
+import { inject } from '@vercel/analytics';
+import sanitizeHtml from 'sanitize-html';
 import { sleep } from 'src/lib/sleeping';
 import { injectSpeedInsights } from '@vercel/speed-insights';
 
-const centralElement = ref(null) as Ref<HTMLElement | null>
+const centralElement = ref(null) as Ref<HTMLElement | null>;
 
-onMounted(()=> {
-  inject()
+onMounted(() => {
+  inject();
   injectSpeedInsights();
-})
+});
 
-const force_no_click_hint = ref(false)
+const force_no_click_hint = ref(false);
 
-const text_animation_fadeout_speed = ref('slow')
+const text_animation_fadeout_speed = ref('slow');
 
 const at_text = ref('');
 const at_source = ref('');
 const nt_text = ref('');
 const nt_source = ref('');
-const $q = useQuasar()
+const $q = useQuasar();
 
-const toggleMobileButtons = ref(true)
+const toggleMobileButtons = ref(true);
 
-const click_lock = ref(false)
+const click_lock = ref(false);
 
 async function handleClick() {
   if ($q.platform.is.mobile) {
-    toggleMobileButtons.value = !toggleMobileButtons.value
+    toggleMobileButtons.value = !toggleMobileButtons.value;
   } else {
     if (click_lock.value) {
-      return
+      return;
     }
-    click_lock.value = true
-    force_no_click_hint.value = true
-    text_animation_fadeout_speed.value = 'fast'
-    setTimeout(()=> {
-      force_no_click_hint.value = false
-    }, 800)
-    await sleep(200)
-    store.switchAT()
-    setTimeout(()=>{click_lock.value = false}, 200)
-    text_animation_fadeout_speed.value = 'slow'
+    click_lock.value = true;
+    force_no_click_hint.value = true;
+    text_animation_fadeout_speed.value = 'fast';
+    setTimeout(() => {
+      force_no_click_hint.value = false;
+    }, 800);
+    await sleep(200);
+    store.switchAT();
+    setTimeout(() => {
+      click_lock.value = false;
+    }, 200);
+    text_animation_fadeout_speed.value = 'slow';
   }
 }
 
-const secondsSinceMove = ref(0)
+const secondsSinceMove = ref(0);
 
 function handleMousemove() {
-  secondsSinceMove.value = 0
+  secondsSinceMove.value = 0;
 }
 
 setInterval(() => {
-  secondsSinceMove.value += 1
-}, 1000)
+  secondsSinceMove.value += 1;
+}, 1000);
 
 const store = useDateStore();
 
@@ -105,23 +112,28 @@ function parse() {
     download: true,
     complete: (result) => {
       const jsonData = result.data as entry[];
-      console.log(jsonData)
+      console.log(jsonData);
       const now = store.date;
+      console.log('todayData');
+      console.log(now)
+      const todayData = get_today(jsonData, now);
+      console.log(todayData)
+      console.log('todayData end');
       at_text.value =
-        sanitizeHtml(get_today(jsonData, now)?.at_text.replaceAll(
+        sanitizeHtml(todayData?.at_text.replaceAll(
           strong_regex,
           '<strong>$1</strong>'
         ) ?? '');
-      at_source.value = get_today(jsonData, now)?.at_source ?? '';
+      at_source.value = todayData?.at_source ?? '';
       nt_text.value =
-        sanitizeHtml(get_today(jsonData, now)?.nt_text.replaceAll(
+        sanitizeHtml(todayData?.nt_text.replaceAll(
           strong_regex,
           '<strong>$1</strong>'
         ) ?? '');
-      nt_source.value = get_today(jsonData, now)?.nt_source ?? '';
+      nt_source.value = todayData?.nt_source ?? '';
     },
     header: true,
-    delimiter: ';',
+    delimiter: ';'
   });
 }
 
@@ -131,7 +143,7 @@ watch(
   },
   parse,
   {
-    immediate: true,
+    immediate: true
   }
 );
 </script>
