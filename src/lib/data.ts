@@ -16,6 +16,13 @@ export interface today_data {
   sunday: string;
 }
 
+
+export interface webData {
+  at_text: string;
+  at_source: string;
+  nt_text: string;
+  nt_source: string;
+}
 export interface entry {
   Datum: string;
   Wtag: string;
@@ -54,3 +61,5 @@ export function formatDate(date: Date) {
 
   return [day, month, year].join('.');
 }
+
+export const delimiter = '\t';

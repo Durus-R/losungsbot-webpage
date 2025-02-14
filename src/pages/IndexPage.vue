@@ -8,18 +8,17 @@
     <div class="sr-only">
       BARRIEREFREIER TEXT | ACCESSIBLE TEXT:
       Losungsvers:
-      <div v-html="at_text" />
-      ({{ at_source }}). Lehrvers:
+      <div v-html="web_data.at_text" />
+      ({{ web_data.at_source }}). Lehrvers:
       <div v-html="nt_text" />
-      ({{ nt_source }}).
+      ({{ web_data.nt_source }}).
     </div>
     <div class="column items-center justify-center">
       <MainText
-        ref="centralElement"
-        :at_text="at_text"
-        :at_source="at_source"
-        :nt_text="nt_text"
-        :nt_source="nt_source"
+        :at_text="web_data.at_text"
+        :at_source="web_data.at_source"
+        :nt_text="web_data.nt_text"
+        :nt_source="web_data.nt_source"
       ></MainText>
       <transition
         appear
@@ -36,20 +35,17 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, Ref, ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import MainText from '../components/MainText.vue';
 import ContextButton from '../components/ActionButtons.vue';
-import { get_today, entry } from 'src/lib/data';
+import { webData } from 'src/lib/data';
 import { useDateStore } from 'src/stores/today_date';
-import Papa from 'papaparse';
 import { watch } from 'vue';
 import { useQuasar } from 'quasar';
 import { inject } from '@vercel/analytics';
-import sanitizeHtml from 'sanitize-html';
 import { sleep } from 'src/lib/sleeping';
 import { injectSpeedInsights } from '@vercel/speed-insights';
-
-const centralElement = ref(null) as Ref<HTMLElement | null>;
+import { parse, parseResult } from 'src/lib/csv';
 
 onMounted(() => {
   inject();
@@ -60,10 +56,13 @@ const force_no_click_hint = ref(false);
 
 const text_animation_fadeout_speed = ref('slow');
 
-const at_text = ref('');
-const at_source = ref('');
-const nt_text = ref('');
-const nt_source = ref('');
+const web_data = ref<webData>({
+  at_text: '',
+  at_source: '',
+  nt_text: '',
+  nt_source: ''
+});
+
 const $q = useQuasar();
 
 const toggleMobileButtons = ref(true);
@@ -104,44 +103,15 @@ setInterval(() => {
 
 const store = useDateStore();
 
-const strong_regex = /\/(.*?)\//g;
 
-function parse() {
-  Papa.parse(`/Losungen_${(new Date()).getFullYear()}.csv`, {
-    encoding: 'utf-8',
-    download: true,
-    complete: (result) => {
-      const jsonData = result.data as entry[];
-      console.log(jsonData);
-      const now = store.date;
-      console.log('todayData');
-      console.log(now)
-      const todayData = get_today(jsonData, now);
-      console.log(todayData)
-      console.log('todayData end');
-      at_text.value =
-        sanitizeHtml(todayData?.at_text.replaceAll(
-          strong_regex,
-          '<strong>$1</strong>'
-        ) ?? '');
-      at_source.value = todayData?.at_source ?? '';
-      nt_text.value =
-        sanitizeHtml(todayData?.nt_text.replaceAll(
-          strong_regex,
-          '<strong>$1</strong>'
-        ) ?? '');
-      nt_source.value = todayData?.nt_source ?? '';
-    },
-    header: true,
-    delimiter: ';'
-  });
-}
 
 watch(
   () => {
     return store.date;
   },
-  parse,
+  ()=>{parse(window.location.origin, (result)=> {
+   web_data.value = parseResult(result, store.date)
+  })},
   {
     immediate: true
   }
