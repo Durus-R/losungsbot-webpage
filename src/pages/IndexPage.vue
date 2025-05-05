@@ -31,26 +31,20 @@
       </transition>
     </div>
   </q-page>
-  <ContextButton :toggleButtons="toggleMobileButtons" :at_source="at_source" :nt_source="nt_source"></ContextButton>
+  <ContextButton :toggleButtons="toggleMobileButtons" :at_source="web_data.at_source" :nt_source="web_data.nt_source"></ContextButton>
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { ref } from 'vue';
 import MainText from '../components/MainText.vue';
 import ContextButton from '../components/ActionButtons.vue';
 import { webData } from 'src/lib/data';
 import { useDateStore } from 'src/stores/today_date';
 import { watch } from 'vue';
 import { useQuasar } from 'quasar';
-import { inject } from '@vercel/analytics';
 import { sleep } from 'src/lib/sleeping';
-import { injectSpeedInsights } from '@vercel/speed-insights';
 import { parse, parseResult } from 'src/lib/csv';
 
-onMounted(() => {
-  inject();
-  injectSpeedInsights();
-});
 
 const force_no_click_hint = ref(false);
 

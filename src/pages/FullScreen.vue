@@ -10,20 +10,14 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { ref } from 'vue';
 import MainText from '../components/MainText.vue';
 import { webData } from 'src/lib/data';
 import { useDateStore } from 'src/stores/today_date';
 import { watch } from 'vue';
-import { inject } from '@vercel/analytics';
-import { injectSpeedInsights } from '@vercel/speed-insights';
 import { parse, parseResult } from 'src/lib/csv';
 
 
-onMounted(() => {
-  inject();
-  injectSpeedInsights();
-});
 
 
 const web_data = ref<webData>({
