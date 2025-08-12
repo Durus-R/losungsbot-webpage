@@ -1,0 +1,8 @@
+name = "losungsbot-webpage"
+compatibility_date = "2025-08-12"
+
+[build]
+command = "npm run build:pwa"
+
+[assets]
+directory = "./dist/pwa"
